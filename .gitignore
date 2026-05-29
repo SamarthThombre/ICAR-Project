@@ -1,0 +1,13 @@
+# Ignore Drupal Core & Vendor files
+vendor/
+web/core/
+web/modules/contrib/
+web/themes/contrib/
+web/profiles/contrib/
+
+# Ignore user uploads and generated files
+web/sites/default/files/
+web/sites/default/settings.php
+
+# Ignore environment files
+.env

@@ -1,0 +1,32 @@
+services:
+  drupal:
+    build: .
+    container_name: drupal_app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - DRUPAL_DATABASE_HOST=db
+      - DRUPAL_DATABASE_NAME=drupal_db
+      - DRUPAL_DATABASE_USER=drupal_user
+      - DRUPAL_DATABASE_PASSWORD=drupal_password
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:10.11
+    container_name: drupal_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: drupal_db
+      MYSQL_USER: drupal_user
+      MYSQL_PASSWORD: drupal_password
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+volumes:
+  db_data:
